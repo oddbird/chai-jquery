@@ -166,7 +166,7 @@
   chai.Assertion.overwriteProperty('exist', function (_super) {
     return function () {
       var obj = flag(this, 'object');
-      if (obj instanceof $) {
+      if (obj instanceof $ || obj.jquery) {
         this.assert(
             obj.length > 0
           , 'expected ' + inspect(obj.selector) + ' to exist'
@@ -180,7 +180,7 @@
   chai.Assertion.overwriteProperty('empty', function (_super) {
     return function () {
       var obj = flag(this, 'object');
-      if (obj instanceof $) {
+      if (obj instanceof $ || obj.jquery) {
         this.assert(
           obj.is(':empty')
           , 'expected #{this} to be empty'
@@ -194,7 +194,7 @@
   chai.Assertion.overwriteMethod('match', function (_super) {
     return function (selector) {
       var obj = flag(this, 'object');
-      if (obj instanceof $) {
+      if (obj instanceof $ || obj.jquery) {
         this.assert(
             obj.is(selector)
           , 'expected #{this} to match #{exp}'
@@ -211,7 +211,7 @@
     function (_super) {
       return function (text) {
         var obj = flag(this, 'object');
-        if (obj instanceof $) {
+        if (obj instanceof $ || obj.jquery) {
           this.assert(
               obj.is(':contains(\'' + text + '\')')
             , 'expected #{this} to contain #{exp}'
